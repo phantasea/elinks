@@ -203,6 +203,9 @@ close_tab(struct terminal *term, struct session *ses)
 	int tabs_count = number_of_tabs(term);
 
 	if (tabs_count < 2) {
+        //mod by chris
+        exit_prog(ses, 0);
+        return;
 		query_exit(ses);
 		return;
 	}
