@@ -103,6 +103,11 @@ ACTION_(MAIN, "scroll-down", SCROLL_DOWN, N__("Scroll down"), ACTION_REQUIRE_VIE
 ACTION_(MAIN, "scroll-left", SCROLL_LEFT, N__("Scroll left"), ACTION_REQUIRE_VIEW_STATE),
 ACTION_(MAIN, "scroll-right", SCROLL_RIGHT, N__("Scroll right"), ACTION_REQUIRE_VIEW_STATE),
 ACTION_(MAIN, "scroll-up", SCROLL_UP, N__("Scroll up"), ACTION_REQUIRE_VIEW_STATE),
+//add by chris ******************************************
+ACTION_(MAIN, "scroll-top", SCROLL_TOP, N__("Scroll to put current line at the top of the window"), ACTION_REQUIRE_VIEW_STATE),
+ACTION_(MAIN, "scroll-mid", SCROLL_MID, N__("Scroll to put current line at the middle of the window"), ACTION_REQUIRE_VIEW_STATE),
+ACTION_(MAIN, "scroll-bot", SCROLL_BOT, N__("Scroll to put current line at the bottom of the window"), ACTION_REQUIRE_VIEW_STATE),
+//add by chris ******************************************
 ACTION_(MAIN, "search", SEARCH, N__("Search for a text pattern"), ACTION_REQUIRE_VIEW_STATE | ACTION_REQUIRE_LOCATION),
 ACTION_(MAIN, "search-back", SEARCH_BACK, N__("Search backwards for a text pattern"), ACTION_REQUIRE_VIEW_STATE | ACTION_REQUIRE_LOCATION),
 ACTION_(MAIN, "search-typeahead", SEARCH_TYPEAHEAD, N__("Search link text by typing ahead"), ACTION_REQUIRE_VIEW_STATE | ACTION_REQUIRE_LOCATION),

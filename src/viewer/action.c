@@ -529,6 +529,20 @@ do_action(struct session *ses, enum main_action action_id, int verbose)
 			status = scroll_up(ses, doc_view);
 			break;
 
+        //add by chris ******************************************
+        case ACT_MAIN_SCROLL_TOP:
+            status = scroll_top(ses, doc_view);
+            break;
+
+		case ACT_MAIN_SCROLL_MID:
+            status = scroll_mid(ses, doc_view);
+            break;
+
+        case ACT_MAIN_SCROLL_BOT:
+            status = scroll_bot(ses, doc_view);
+            break;
+        //add by chris ******************************************
+
 		case ACT_MAIN_SEARCH:
 			status = search_dlg(ses, doc_view, 1);
 			break;
