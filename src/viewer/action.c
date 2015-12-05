@@ -339,6 +339,20 @@ do_action(struct session *ses, enum main_action action_id, int verbose)
 			status = move_current_top(ses, doc_view);
 			break;
 
+        //add by chris ******************************************
+		case ACT_MAIN_MOVE_CURSOR_TOP:
+            status = move_cursor_top(ses, doc_view);
+            break;
+
+		case ACT_MAIN_MOVE_CURSOR_MID:
+            status = move_cursor_mid(ses, doc_view);
+            break;
+
+		case ACT_MAIN_MOVE_CURSOR_BOT:
+            status = move_cursor_bot(ses, doc_view);
+            break;
+        //add by chris ******************************************
+
 		case ACT_MAIN_MOVE_CURSOR_UP:
 			status = move_cursor_up(ses, doc_view);
 			break;

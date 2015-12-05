@@ -67,6 +67,12 @@ enum frame_event_status move_cursor(struct session *ses,
 				    struct document_view *doc_view,
 				    int x, int y);
 
+//add by chris ******************************************
+enum frame_event_status move_cursor_top(struct session *ses, struct document_view *view);
+enum frame_event_status move_cursor_mid(struct session *ses, struct document_view *view);
+enum frame_event_status move_cursor_bot(struct session *ses, struct document_view *view);
+//add by chris ******************************************
+
 /** Used for changing wrapping of text */
 void toggle_wrap_text(struct session *ses, struct document_view *doc_view, int xxxx);
 

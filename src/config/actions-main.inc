@@ -54,6 +54,11 @@ ACTION_(MAIN, "mark-goto", MARK_GOTO, N__("Go at a specified mark"), ACTION_REQU
 ACTION_(MAIN, "mark-set", MARK_SET, N__("Set a mark"), ACTION_REQUIRE_VIEW_STATE),
 ACTION_(MAIN, "menu", MENU, N__("Activate the menu"), 0),
 ACTION_(MAIN, "move-current-top", MOVE_CURRENT_TOP, N__("Move downwards to put the current line at the top"), ACTION_REQUIRE_VIEW_STATE),
+//add by chris ******************************************
+ACTION_(MAIN, "move-cursor-top", MOVE_CURSOR_TOP, N__("Move to the top of the window"), ACTION_REQUIRE_VIEW_STATE),
+ACTION_(MAIN, "move-cursor-mid", MOVE_CURSOR_MID, N__("Move to the middle of the window"), ACTION_REQUIRE_VIEW_STATE),
+ACTION_(MAIN, "move-cursor-bot", MOVE_CURSOR_BOT, N__("Move to the bottom of the window"), ACTION_REQUIRE_VIEW_STATE),
+//add by chris ******************************************
 ACTION_(MAIN, "move-cursor-down", MOVE_CURSOR_DOWN, N__("Move cursor down"), ACTION_REQUIRE_VIEW_STATE),
 ACTION_(MAIN, "move-cursor-left", MOVE_CURSOR_LEFT, N__("Move cursor left"), ACTION_REQUIRE_VIEW_STATE),
 ACTION_(MAIN, "move-cursor-line-start", MOVE_CURSOR_LINE_START, N__("Move cursor to the start of the line"), ACTION_REQUIRE_VIEW_STATE),

@@ -637,6 +637,36 @@ move_cursor_down(struct session *ses, struct document_view *view)
 	return move_cursor_rel(ses, view, 0, 1);
 }
 
+//add by chris ******************************************
+enum frame_event_status
+move_cursor_top(struct session *ses, struct document_view *view)
+{
+    int rely = -(ses->tab->y);
+	return move_cursor_rel(ses, view, 0, rely);
+}
+
+enum frame_event_status
+move_cursor_mid(struct session *ses, struct document_view *view)
+{
+    struct box *box = &view->box;
+    int midy = box->height / 2;
+    int cury = ses->tab->y;
+
+    if (cury == midy) return FRAME_EVENT_OK;
+
+    int rely = midy - cury;
+	return move_cursor_rel(ses, view, 0, rely);
+}
+
+enum frame_event_status
+move_cursor_bot(struct session *ses, struct document_view *view)
+{
+    struct box *box = &view->box;
+    int rely = box->height - ses->tab->y - 1;
+	return move_cursor_rel(ses, view, 0, rely);
+}
+//add by chris ******************************************
+
 enum frame_event_status
 move_link_up_line(struct session *ses, struct document_view *doc_view)
 {
