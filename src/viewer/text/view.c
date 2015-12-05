@@ -387,6 +387,60 @@ scroll_down(struct session *ses, struct document_view *doc_view)
 	return vertical_scroll(ses, doc_view, steps);
 }
 
+//add by chris ******************************************
+enum frame_event_status
+scroll_top(struct session *ses, struct document_view *doc_view)
+{
+	(void)set_kbd_repeat_count(ses, 0);
+
+    int steps = ses->tab->y;
+	enum frame_event_status fes =  vertical_scroll(ses, doc_view, steps);
+
+	struct terminal *term = ses->tab->term;
+	set_cursor(term, ses->tab->x, 0, 0);
+	set_window_ptr(ses->tab, ses->tab->x, 0);
+
+    return fes;
+}
+
+enum frame_event_status
+scroll_mid(struct session *ses, struct document_view *doc_view)
+{
+	(void)set_kbd_repeat_count(ses, 0);
+
+    struct box *box = &doc_view->box;
+    int midy = box->height / 2;
+    int cury = ses->tab->y;
+
+    if (cury == midy) return FRAME_EVENT_OK;
+
+    int steps = cury - midy;
+	enum frame_event_status fes =  vertical_scroll(ses, doc_view, steps);
+
+	struct terminal *term = ses->tab->term;
+	set_cursor(term, ses->tab->x, midy, 0);
+	set_window_ptr(ses->tab, ses->tab->x, midy);
+
+    return fes;
+}
+
+enum frame_event_status
+scroll_bot(struct session *ses, struct document_view *doc_view)
+{
+	(void)set_kbd_repeat_count(ses, 0);
+
+    struct box *box = &doc_view->box;
+    int steps = box->height - ses->tab->y - 1;
+	enum frame_event_status fes =  vertical_scroll(ses, doc_view, -steps);
+
+	struct terminal *term = ses->tab->term;
+	set_cursor(term, ses->tab->x, box->height - 1, 0);
+	set_window_ptr(ses->tab, ses->tab->x, box->height - 1);
+
+    return fes;
+}
+//add by chris ******************************************
+
 enum frame_event_status
 scroll_left(struct session *ses, struct document_view *doc_view)
 {
@@ -641,6 +695,8 @@ move_cursor_down(struct session *ses, struct document_view *view)
 enum frame_event_status
 move_cursor_top(struct session *ses, struct document_view *view)
 {
+	(void)set_kbd_repeat_count(ses, 0);
+
     int rely = -(ses->tab->y);
 	return move_cursor_rel(ses, view, 0, rely);
 }
@@ -648,6 +704,8 @@ move_cursor_top(struct session *ses, struct document_view *view)
 enum frame_event_status
 move_cursor_mid(struct session *ses, struct document_view *view)
 {
+	(void)set_kbd_repeat_count(ses, 0);
+
     struct box *box = &view->box;
     int midy = box->height / 2;
     int cury = ses->tab->y;
@@ -661,6 +719,8 @@ move_cursor_mid(struct session *ses, struct document_view *view)
 enum frame_event_status
 move_cursor_bot(struct session *ses, struct document_view *view)
 {
+	(void)set_kbd_repeat_count(ses, 0);
+
     struct box *box = &view->box;
     int rely = box->height - ses->tab->y - 1;
 	return move_cursor_rel(ses, view, 0, rely);

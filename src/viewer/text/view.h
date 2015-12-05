@@ -71,6 +71,10 @@ enum frame_event_status move_cursor(struct session *ses,
 enum frame_event_status move_cursor_top(struct session *ses, struct document_view *view);
 enum frame_event_status move_cursor_mid(struct session *ses, struct document_view *view);
 enum frame_event_status move_cursor_bot(struct session *ses, struct document_view *view);
+
+enum frame_event_status scroll_top(struct session *ses, struct document_view *view);
+enum frame_event_status scroll_mid(struct session *ses, struct document_view *view);
+enum frame_event_status scroll_bot(struct session *ses, struct document_view *view);
 //add by chris ******************************************
 
 /** Used for changing wrapping of text */
