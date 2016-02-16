@@ -1500,9 +1500,52 @@ put_chars_conv(struct html_context *html_context,
 		       NULL, (void (*)(void *, unsigned char *, int)) put_chars, html_context);
 }
 
+/*
+ * Converts a number in base 10 to a string in another base whose symbols are
+ * represented by key. I the trivial case, key="0123456789". A more homerow
+ * friendly key="gfdsahjkl;trewqyuiopvcxznm". Returns the length of link_sym.
+ */
+int
+dec2qwerty(int num, unsigned char *link_sym, const unsigned char *key, int base)
+{
+	int newlen, i, pow;
+
+	if (base < 2) return 0;
+
+	for (newlen = 1, pow = base; pow <= num; ++newlen, pow *= base);
+
+	link_sym[newlen] = '\0';
+	for (i = 1; i <= newlen; ++i) {
+		int key_index = num % base;
+		link_sym[newlen - i] = key[key_index];
+		num /= base;
+	}
+	return newlen;
+}
+
+/*
+ * Returns the value of link_sym in decimal according to key.
+ */
+int
+qwerty2dec(const unsigned char *link_sym, const unsigned char *key, int base)
+{
+	int z = 0;
+	int symlen = strlen(link_sym);
+	int i;
+	int pow;
+
+	for (i = 0, pow = 1; i < symlen; ++i, pow *= base) {
+		int j = 0;
+		while (key[j] != link_sym[symlen - 1 - i]) ++j;
+		z += j * pow;
+	}
+	return z;
+}
+
 static inline void
 put_link_number(struct html_context *html_context)
 {
+	char *symkey = get_opt_str("document.browse.links.label_key", NULL);
 	struct part *part = html_context->part;
 	unsigned char s[64];
 	unsigned char *fl = format.link;
@@ -1510,12 +1553,13 @@ put_link_number(struct html_context *html_context)
 	unsigned char *fi = format.image;
 	struct form_control *ff = format.form;
 	int slen = 0;
+	int base = strlen(symkey);
 
 	format.link = format.target = format.image = NULL;
 	format.form = NULL;
 
 	s[slen++] = '[';
-	ulongcat(s, &slen, part->link_num, sizeof(s) - 3, 0);
+	slen += dec2qwerty(part->link_num, s + 1, symkey, base);
 	s[slen++] = ']';
 	s[slen] = '\0';
 
