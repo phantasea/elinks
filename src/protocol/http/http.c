@@ -470,7 +470,7 @@ check_http_server_bugs(struct uri *uri, struct http_connection_info *http,
 		return 0;
 
 	for (s = buggy_servers; *s; s++) {
-		if (strstr(server, *s)) {
+		if (strstr((const char *)server, *s)) {
 			add_blacklist_entry(uri, SERVER_BLACKLIST_HTTP10);
 			break;
 		}
@@ -998,7 +998,7 @@ http_send_header(struct socket *socket)
 		/* We search for first '\n' in uri->post to get content type
 		 * as set by get_form_uri(). This '\n' is dropped if any
 		 * and replaced by correct '\r\n' termination here. */
-		unsigned char *postend = strchr(uri->post, '\n');
+		unsigned char *postend = strchr((const char *)uri->post, '\n');
 		struct connection_state error;
 
 		if (postend) {
@@ -1602,7 +1602,7 @@ again:
 		}
 
 		if ((d = parse_header(cached->head, "Pragma", NULL))) {
-			if (strstr(d, "no-cache")) {
+			if (strstr((const char *)d, "no-cache")) {
 				cached->cache_mode = CACHE_MODE_NEVER;
 				cached->expire = 0;
 			}
@@ -1611,12 +1611,12 @@ again:
 
 		if (cached->cache_mode != CACHE_MODE_NEVER
 		    && (d = parse_header(cached->head, "Cache-Control", NULL))) {
-			if (strstr(d, "no-cache") || strstr(d, "must-revalidate")) {
+			if (strstr((const char *)d, "no-cache") || strstr((const char *)d, "must-revalidate")) {
 				cached->cache_mode = CACHE_MODE_NEVER;
 				cached->expire = 0;
 
 			} else  {
-				unsigned char *pos = strstr(d, "max-age=");
+				unsigned char *pos = strstr((const char *)d, "max-age=");
 
 				assert(cached->cache_mode != CACHE_MODE_NEVER);
 
