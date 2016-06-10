@@ -547,6 +547,18 @@ dialog_goto_url(struct session *ses, unsigned char *url)
 		     NULL);
 }
 
+//add by chris *************
+void
+dialog_goto_url_tab(struct session *ses, unsigned char *url)
+{
+	input_dialog(ses->tab->term, NULL,
+		     N_("Go to URL"), N_("Enter URL"),
+		     ses, &goto_url_history,
+		     MAX_STR_LEN, url, 0, 0, NULL,
+		     (void (*)(void *, unsigned char *)) goto_url_tab_with_hook,
+		     NULL);
+}
+//add by chris *************
 
 static INIT_INPUT_HISTORY(file_history);
 

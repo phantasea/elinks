@@ -776,6 +776,26 @@ goto_url_with_hook(struct session *ses, unsigned char *url)
 	done_uri(uri);
 }
 
+//add by chris *************
+extern void open_uri_in_new_tab(struct session *ses, struct uri *uri, int in_background, int based);
+
+void
+goto_url_tab_with_hook(struct session *ses, unsigned char *url)
+{
+	unsigned char *cwd = ses->tab->term->cwd;
+	struct uri *uri;
+
+	/* Bail out if passed empty string from goto-url dialog */
+	if (!*url) return;
+
+	uri = get_hooked_uri(url, ses, cwd);
+	if (!uri) return;
+
+    open_uri_in_new_tab(ses, uri, 0, 1);
+	if (uri) done_uri(uri);
+}
+//add by chris *************
+
 int
 goto_url_home(struct session *ses)
 {

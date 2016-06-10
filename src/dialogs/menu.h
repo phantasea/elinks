@@ -14,6 +14,7 @@ struct uri;
 
 void activate_bfu_technology(struct session *, int);
 
+void dialog_goto_url_tab(struct session *ses, unsigned char *url);  //add by chris
 void dialog_goto_url(struct session *ses, unsigned char *url);
 /* void dialog_save_url(struct session *ses); */
 

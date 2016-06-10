@@ -34,6 +34,7 @@ void goto_uri_frame(struct session *, struct uri *, unsigned char *, enum cache_
 void delayed_goto_uri_frame(void *);
 void goto_url(struct session *, unsigned char *);
 void goto_url_with_hook(struct session *, unsigned char *);
+void goto_url_tab_with_hook(struct session *, unsigned char *);  //add by chris
 int goto_url_home(struct session *ses);
 void goto_imgmap(struct session *, struct uri *, unsigned char *);
 void map_selected(struct terminal *term, void *ld, void *ses);

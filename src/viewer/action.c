@@ -44,6 +44,20 @@
 #include "viewer/text/search.h"
 #include "viewer/text/view.h"
 
+//add by chris *************
+static void
+goto_url_tab(struct session *ses,
+		unsigned char *(*get_url)(struct session *, unsigned char *, size_t))
+{
+	unsigned char url[MAX_STR_LEN];
+
+	if (!get_url || !get_url(ses, url, sizeof(url)))
+		url[0] = 0;
+
+	dialog_goto_url_tab(ses, url);
+}
+//add by chris *************
+
 static void
 goto_url_action(struct session *ses,
 		unsigned char *(*get_url)(struct session *, unsigned char *, size_t))
@@ -240,6 +254,12 @@ do_action(struct session *ses, enum main_action action_id, int verbose)
 		case ACT_MAIN_GOTO_URL_HOME:
 			goto_url_home(ses);
 			break;
+
+        //add by chris *************
+        case ACT_MAIN_GOTO_URL_TAB:
+            goto_url_tab(ses, NULL);
+            break;
+        //add by chris *************
 
 		case ACT_MAIN_HEADER_INFO:
 			protocol_header_dialog(ses);
