@@ -225,7 +225,7 @@ push_bookmark_button(struct dialog_data *dlg_data,
 
 static const struct hierbox_browser_button globhist_buttons[] = {
 	/* [gettext_accelerator_context(.globhist_buttons)] */
-	{ N_("~Goto"),           push_hierbox_goto_button,   1 },
+	{ N_("G~oto"),           push_hierbox_goto_button,   1 },  //mod by chris 'g' to 'o'
 	{ N_("~Info"),           push_hierbox_info_button,   1 },
 #ifdef CONFIG_BOOKMARKS
 	{ N_("~Bookmark"),       push_bookmark_button,       0 },
@@ -233,7 +233,7 @@ static const struct hierbox_browser_button globhist_buttons[] = {
 	{ N_("~Delete"),         push_hierbox_delete_button, 0 },
 	{ N_("~Search"),         push_search_button,         1 },
 	{ N_("~Toggle display"), push_toggle_display_button, 1 },
-	{ N_("C~lear"),          push_hierbox_clear_button,  0 },
+	{ N_("Cle~ar"),          push_hierbox_clear_button,  0 },  //mod by chris 'l' to 'a'
 #if 0
 	/* TODO: Would this be useful? --jonas */
 	{ N_("Save"),		push_save_button,            0 },
