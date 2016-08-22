@@ -246,15 +246,16 @@ parse_header_param(unsigned char *str, unsigned char *name, unsigned char **ret,
 	if (!*p) return HEADER_PARAM_NOT_FOUND;
 
 	namelen = strlen(name);
-	do {
-		if (!content_disposition) {
-			p = strchr((const char *)p, ';');
-			if (!p) return HEADER_PARAM_NOT_FOUND;
-		}
 
-		while (*p && (*p == ';' || *p <= ' ')) p++;
-		if (strlen(p) < namelen) return HEADER_PARAM_NOT_FOUND;
-	} while (c_strncasecmp(p, name, namelen));
+	if (!content_disposition) {
+a:
+		p = strchr((const char *)p, ';');
+		if (!p) return HEADER_PARAM_NOT_FOUND;
+	}
+	while (*p && (*p == ';' || *p <= ' ')) p++;
+
+	if (strlen(p) < namelen) return HEADER_PARAM_NOT_FOUND;
+	if (c_strncasecmp(p, name, namelen)) goto a;
 
 	p += namelen;
 
